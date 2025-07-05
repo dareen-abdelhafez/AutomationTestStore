@@ -1,6 +1,8 @@
 package LoginPage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -26,6 +28,11 @@ public class TestCases {
 	public void signup() {
 		
 		driver.navigate().to(SignUpPage);
+		
+		WebElement firstname=driver.findElement(By.name("firstname"));
+		
+		firstname.sendKeys("dareen");
+		
 		
 	}
 	

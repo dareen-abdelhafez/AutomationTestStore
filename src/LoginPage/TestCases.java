@@ -8,6 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.Select;
+
+
+
 
 public class TestCases {
 
@@ -29,7 +33,7 @@ public class TestCases {
 	}
 	@Test(priority=1)
 	
-	public void signup() {
+	public void signup() throws InterruptedException {
 		
 		driver.navigate().to(SignUpPage);
 		//ELEMNTS
@@ -46,6 +50,11 @@ public class TestCases {
 		WebElement loginNameinput=driver.findElement(By.id("AccountFrm_loginname"));
 		WebElement Passwordinput=driver.findElement(By.id("AccountFrm_password"));
 		WebElement passwordConfirminput=driver.findElement(By.id("AccountFrm_confirm"));
+		WebElement agreebox=driver.findElement(By.id("AccountFrm_agree"));
+		WebElement continueButton=driver.findElement(By.cssSelector(".btn.btn-orange.pull-right.lock-on-click"));
+		WebElement selectcounty=driver.findElement(By.id("AccountFrm_country_id"));
+		WebElement selectstate =driver.findElement(By.id("AccountFrm_zone_id"));
+		
 		
 		
 		//DATA
@@ -56,7 +65,8 @@ public class TestCases {
 		int randomlastname=rand.nextInt(lastname.length);
 		String Randomlastname=lastname[randomlastname];
 		int randomnumberforemail=rand.nextInt(6666);
-		String email=firstname[myrandomindex]+lastname[randomlastname]+randomnumberforemail+"@gmail.com";
+		String email=Randomfirstname+ Randomlastname +randomnumberforemail+"@gmail.com";
+		//String email=firstname[myrandomindex]+lastname[randomlastname]+randomnumberforemail+"@gmail.com";
 		String telephone="0798888655";
 		String fax="6355363";
 		String company="abcd";
@@ -66,6 +76,8 @@ public class TestCases {
 		String postalcode="112233";
 		String password="Test@1234";
 		String loginname=firstname[myrandomindex]+lastname[randomlastname]+randomnumberforemail;
+		
+	
 		
 		
 		
@@ -80,10 +92,40 @@ public class TestCases {
 		addressinput2.sendKeys(address21);
 		cityinput.sendKeys(city);
 		zipcodeinput.sendKeys(postalcode);
+		
+		Select selectforthecountry=new Select(selectcounty);
+		
+		selectforthecountry.selectByVisibleText("Jordan");
+		
+		Thread.sleep(1000);
+		Select selectforthestate=new Select(selectstate);
+		
+		int option=selectstate.findElements(By.tagName("option")).size();
+	
+		//select first option
+		//selectforthestate.selectByIndex(1);
+		
+	     //select randomly
+		int randomindex=rand.nextInt(1,option);
+		selectforthestate.selectByIndex(randomindex);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		loginNameinput.sendKeys(loginname);
 		Passwordinput.sendKeys(password);
 		passwordConfirminput.sendKeys(password);
-
+		agreebox.click();
+		continueButton.click();
+		
+		
 
 		
 		
